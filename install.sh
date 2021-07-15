@@ -21,6 +21,7 @@ cd /mnt
 btrfs su cr @
 btrfs su cr @home
 btrfs su cr @opt
+btrfs su cr @snapshots
 
 cd /
 umount /mnt
@@ -32,6 +33,7 @@ mkdir boot home opt .snapshots
 
 mount -o noatime,commit=120,compress-force=zstd,space_cache,discard=async,subvol=@home ${DEVICE}p3 /mnt/home
 mount -o noatime,commit=120,compress-force=zstd,space_cache,discard=async,subvol=@opt ${DEVICE}p3 /mnt/opt
+mount -o noatime,commit=120,compress-force=zstd,space_cache,discard=async,subvol=@snapshots ${DEVICE}p3 /mnt/.snapshots
 mount ${DEVICE}p1 /mnt/boot
 
 # Install system
