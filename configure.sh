@@ -50,3 +50,6 @@ paru -S pipewire pipewire-alsa pipewire-pulse
 paru -S bbswitch-dkms
 echo "options bbswitch load_state=0 unload_state=1" > /etc/modprobe.d/bbswitch.conf
 echo "bbswitch" > /etc/modules-load.d/bbswitch.conf
+
+# Fonts
+paru -S noto-fonts noto-fonts-extra noto-fonts-cjk noto-fonts-emoji
