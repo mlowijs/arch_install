@@ -1,5 +1,6 @@
-# Blacklist module
+# Blacklist modules
 echo "blacklist psmouse" > /etc/modprobe.d/psmouse.conf
+echo "blacklist nouveau" > /etc/modprobe.d/nouveau.conf
 
 # Network and time
 systemctl enable NetworkManager
