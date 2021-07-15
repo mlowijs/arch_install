@@ -32,3 +32,12 @@ git clone https://aur.archlinux.org/paru.git
 cd paru
 makepkg -si
 rm -rf paru
+sudo nano /etc/paru.conf # BottomUp, NewsOnUpgrade
+
+# Bluetooth
+paru -S bluez bluez-utils
+sudo systemctl enable bluetooth
+sudo nano /etc/bluetooth/main.conf # AutoEnable
+
+# Audio
+paru -S sof-firmware pipewire pipewire-alsa pipewire-pulse
