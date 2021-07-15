@@ -1,10 +1,12 @@
 # Blacklist module
 echo "blacklist psmouse" > /etc/modprobe.d/psmouse.conf
 
-# Network
+# Network and time
 systemctl enable NetworkManager
 systemctl start NetworkManager
 nmcli d wifi connect "BS55" password xxx
+
+timedatectl set-ntp true
 
 # Update system (just to be sure)
 pacman -Syu
