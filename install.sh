@@ -54,7 +54,7 @@ echo "michielxps15" > /etc/hostname
 nano /etc/hosts
 
 # Mkinitcpio
-nano /etc/mkinitcpio
+nano /etc/mkinitcpio.conf
 mkinitcpio -P
 
 # Root password
@@ -69,3 +69,4 @@ nano /boot/loader/entries/arch.conf
 exit
 cd
 umount -R /mnt
+reboot
