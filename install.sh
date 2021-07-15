@@ -28,7 +28,7 @@ umount /mnt
 mount -o noatime,commit=120,compress-force=zstd,space_cache,discard=async,subvol=@ ${DEVICE}p3 /mnt
 
 cd /mnt
-mkdir boot home opt
+mkdir boot home opt .snapshots
 
 mount -o noatime,commit=120,compress-force=zstd,space_cache,discard=async,subvol=@home ${DEVICE}p3 /mnt/home
 mount -o noatime,commit=120,compress-force=zstd,space_cache,discard=async,subvol=@opt ${DEVICE}p3 /mnt/opt
