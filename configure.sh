@@ -31,6 +31,7 @@ sudo nano /etc/systemd/sleep.conf # HibernateDelaySec
 git clone https://aur.archlinux.org/paru.git
 cd paru
 makepkg -si
+cd
 rm -rf paru
 sudo nano /etc/paru.conf # BottomUp, NewsOnUpgrade
 
