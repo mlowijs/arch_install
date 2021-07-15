@@ -35,7 +35,7 @@ mount -o noatime,commit=120,compress-force=zstd,space_cache,discard=async,subvol
 mount ${DEVICE}p1 /mnt/boot
 
 # Install system
-pacstrap /mnt base linux-zen linux-zen-headers linux-firmware btrfs-progs sudo base-devel networkmanager nano intel-ucode
+pacstrap /mnt base linux-zen linux-zen-headers linux-firmware btrfs-progs sudo base-devel networkmanager nano intel-ucode git
 genfstab -L /mnt >> /mnt/etc/fstab
 
 # Chroot
