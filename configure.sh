@@ -59,5 +59,5 @@ ln -s /usr/share/fontconfig/conf.avail/10-sub-pixel-rgb.conf
 #
 # GUI
 #
-paru -S plasma-desktop plasma-wayland-session sddm
+paru -S plasma-desktop plasma-wayland-session sddm konsole
 sudo systemctl enable sddm
