@@ -31,3 +31,4 @@ sudo nano /etc/systemd/sleep.conf # HibernateDelaySec
 git clone https://aur.archlinux.org/paru.git
 cd paru
 makepkg -si
+rm -rf paru
