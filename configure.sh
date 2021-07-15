@@ -53,3 +53,11 @@ echo "bbswitch" > /etc/modules-load.d/bbswitch.conf
 
 # Fonts
 paru -S noto-fonts noto-fonts-extra noto-fonts-cjk noto-fonts-emoji
+cd /etc/fonts/conf.d
+ln -s /usr/share/fontconfig/conf.avail/10-sub-pixel-rgb.conf
+
+#
+# GUI
+#
+paru -S plasma-desktop sddm
+sudo systemctl enable sddm
