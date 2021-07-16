@@ -21,7 +21,6 @@ cd /mnt
 btrfs su cr @
 btrfs su cr @home
 btrfs su cr @opt
-btrfs su cr @snapshots
 
 cd /
 umount /mnt
@@ -29,15 +28,14 @@ umount /mnt
 mount -o noatime,commit=120,compress-force=zstd,space_cache,discard=async,subvol=@ ${DEVICE}p3 /mnt
 
 cd /mnt
-mkdir boot home opt .snapshots
+mkdir boot home opt
 
 mount -o noatime,commit=120,compress-force=zstd,space_cache,discard=async,subvol=@home ${DEVICE}p3 /mnt/home
 mount -o noatime,commit=120,compress-force=zstd,space_cache,discard=async,subvol=@opt ${DEVICE}p3 /mnt/opt
-mount -o noatime,commit=120,compress-force=zstd,space_cache,discard=async,subvol=@snapshots ${DEVICE}p3 /mnt/.snapshots
 mount ${DEVICE}p1 /mnt/boot
 
 # Install system
-pacstrap /mnt base linux-zen linux-zen-headers linux-firmware btrfs-progs sudo base-devel networkmanager nano intel-ucode git sof-firmware
+pacstrap /mnt base linux-zen linux-zen-headers linux-firmware btrfs-progs sudo base-devel networkmanager nano intel-ucode git sof-firmware man-db man-pages
 genfstab -L /mnt >> /mnt/etc/fstab
 
 # Chroot
