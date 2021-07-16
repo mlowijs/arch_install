@@ -59,4 +59,4 @@ ln -s /usr/share/fontconfig/conf.avail/10-sub-pixel-rgb.conf
 #
 # GUI
 #
-paru -S plasma-desktop plasma-wayland-session plasma-wayland-protocols kscreen plasma-nm bluedevil plasma-pa konsole firefox dolphin
+paru -S plasma-desktop plasma-wayland-session plasma-wayland-protocols kscreen plasma-nm bluedevil plasma-pa plasma-thunderbolt powerdevil konsole firefox dolphin
