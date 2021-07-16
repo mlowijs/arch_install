@@ -58,7 +58,7 @@ cd /etc/fonts/conf.d
 ln -s /usr/share/fontconfig/conf.avail/10-sub-pixel-rgb.conf
 
 #
-# GUI
+# GUI (KDE)
 #
 paru -S plasma-desktop plasma-wayland-session plasma-wayland-protocols dbus-python qt6-wayland breeze-gtk kde-gtk-config kscreen libva-mesa-driver mesa-vdpau plasma-nm bluedevil plasma-pa plasma-thunderbolt powerdevil
 
