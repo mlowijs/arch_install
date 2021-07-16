@@ -1,6 +1,7 @@
 # Blacklist modules
 echo "blacklist psmouse" > /etc/modprobe.d/psmouse.conf
 echo "blacklist nouveau" > /etc/modprobe.d/nouveau.conf
+echo "blacklist amdgpu" > /etc/modprobe.d/amdgpu.conf
 
 # Network and time
 systemctl enable NetworkManager
@@ -61,6 +62,7 @@ ln -s /usr/share/fontconfig/conf.avail/10-sub-pixel-rgb.conf
 #
 paru -S plasma-desktop plasma-wayland-session plasma-wayland-protocols dbus-python qt6-wayland breeze-gtk kde-gtk-config kscreen libva-mesa-driver mesa-vdpau plasma-nm bluedevil plasma-pa plasma-thunderbolt powerdevil
 
-# Software
-paru -S konsole firefox dolphin
-paru -S bitwarden-bin rider dotnet-host dotnet-runtime dotnet-sdk visual-studio-code-bin slack-desktop
+# Desktop software
+paru -S konsole firefox dolphin bitwarden-bin
+# Development software
+paru -S rider dotnet-host dotnet-runtime dotnet-sdk visual-studio-code-bin slack-desktop
