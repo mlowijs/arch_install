@@ -52,11 +52,14 @@ echo "options bbswitch load_state=0 unload_state=1" > /etc/modprobe.d/bbswitch.c
 echo "bbswitch" > /etc/modules-load.d/bbswitch.conf
 
 # Fonts
-paru -S noto-fonts noto-fonts-extra noto-fonts-cjk noto-fonts-emoji
+paru -S noto-fonts noto-fonts-extra noto-fonts-cjk noto-fonts-emoji ttf-liberation ttf-dejavu
 cd /etc/fonts/conf.d
 ln -s /usr/share/fontconfig/conf.avail/10-sub-pixel-rgb.conf
 
 #
 # GUI
 #
-paru -S plasma-desktop plasma-wayland-session plasma-wayland-protocols kscreen plasma-nm bluedevil plasma-pa plasma-thunderbolt powerdevil konsole firefox dolphin
+paru -S plasma-desktop plasma-wayland-session plasma-wayland-protocols qt6-wayland breeze-gtk kde-gtk-config kscreen plasma-nm bluedevil plasma-pa plasma-thunderbolt powerdevil konsole firefox dolphin
+
+# Software
+paru -S bitwarden-bin
