@@ -59,7 +59,7 @@ ln -s /usr/share/fontconfig/conf.avail/10-sub-pixel-rgb.conf
 #
 # GUI
 #
-paru -S plasma-desktop plasma-wayland-session plasma-wayland-protocols qt6-wayland breeze-gtk kde-gtk-config kscreen plasma-nm bluedevil plasma-pa plasma-thunderbolt powerdevil konsole firefox dolphin
+paru -S plasma-desktop plasma-wayland-session plasma-wayland-protocols dbus-python qt6-wayland breeze-gtk kde-gtk-config kscreen plasma-nm bluedevil plasma-pa plasma-thunderbolt powerdevil konsole firefox dolphin
 
 # Software
 paru -S bitwarden-bin rider dotnet-host dotnet-runtime dotnet-sdk
