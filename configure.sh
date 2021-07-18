@@ -53,14 +53,20 @@ echo "options bbswitch load_state=0 unload_state=1" > /etc/modprobe.d/bbswitch.c
 echo "bbswitch" > /etc/modules-load.d/bbswitch.conf
 
 # Fonts
-paru -S noto-fonts noto-fonts-extra noto-fonts-cjk noto-fonts-emoji ttf-liberation ttf-dejavu ttf-jetbrains-mono
+paru -S ttf-liberation ttf-dejavu ttf-jetbrains-mono
 cd /etc/fonts/conf.d
 ln -s /usr/share/fontconfig/conf.avail/10-sub-pixel-rgb.conf
+
+# Snapper
+paru -S snapper
+sudo snapper -c root create-config /
+sudo snapper -c root create -d "before-gui"
 
 #
 # GUI (GNOME)
 #
 paru -S gnome-shell gdm gnome-control-center gnome-terminal gnome-tweaks xdg-user-dirs-gtk xdg-desktop-portal-gtk
+paru -S nautilus
 sudo systemctl enable gdm
 
 #
