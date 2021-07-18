@@ -3,6 +3,8 @@ echo "blacklist psmouse" > /etc/modprobe.d/psmouse.conf
 echo "blacklist nouveau" > /etc/modprobe.d/nouveau.conf
 echo "blacklist amdgpu" > /etc/modprobe.d/amdgpu.conf
 echo "options snd_hda_intel power_save=3" > /etc/modprobe.d/snd_hda_intel.conf
+echo "options iwlwifi power_save=1" > /etc/modprobe.d/iwlwifi.conf
+echo "options iwlmvm power_scheme=3" > /etc/modprobe.d/iwlmvm.conf
 
 # Network and time
 systemctl enable NetworkManager
