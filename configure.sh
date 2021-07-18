@@ -28,7 +28,7 @@ sudo nano /etc/pacman.conf # Color
 sudo nano /etc/makepkg.conf # MAKEFLAGS
 
 # Setup systemd logind.conf
-sudo nano /etc/systemd/logind.conf # KillUserProcesses, HandlePowerKey
+sudo nano /etc/systemd/logind.conf # KillUserProcesses, HandlePowerKey, HandleLidSwitch (suspend-then-hibernate)
 sudo nano /etc/systemd/sleep.conf # HibernateDelaySec
 
 # Install paru
