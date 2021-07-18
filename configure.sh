@@ -60,7 +60,7 @@ ln -s /usr/share/fontconfig/conf.avail/10-sub-pixel-rgb.conf
 #
 # GUI (GNOME)
 #
-paru -S gnome-shell gdm gnome-control-center gnome-terminal gnome-tweaks
+paru -S gnome-shell gdm gnome-control-center gnome-terminal gnome-tweaks xdg-user-dirs xdg-user-dirs-gtk
 
 #
 # GUI (KDE)
