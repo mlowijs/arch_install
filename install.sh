@@ -63,7 +63,7 @@ passwd
 # Boot loader
 bootctl install
 nano /boot/loader/loader.conf
-nano /boot/loader/entries/arch.conf # root=LABEL=arch rootflags=subvol=@ resume=LABEL=swap rw
+nano /boot/loader/entries/arch.conf # root=LABEL=arch rootflags=subvol=@ resume=LABEL=swap rw nowatchdog
 
 # Reboot
 exit
