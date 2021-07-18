@@ -79,5 +79,8 @@ paru -S plasma-desktop plasma-wayland-session plasma-wayland-protocols dbus-pyth
 
 # Desktop software
 paru -S firefox bitwarden-bin
+mkdir -p ~/.config/environment.d
+echo "MOZ_ENABLE_WAYLAND=1" > ~/.config/environment.d/envvars.conf
+
 # Development software
 paru -S rider dotnet-host dotnet-runtime dotnet-sdk visual-studio-code-bin slack-desktop
