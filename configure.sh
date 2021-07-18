@@ -58,11 +58,16 @@ cd /etc/fonts/conf.d
 ln -s /usr/share/fontconfig/conf.avail/10-sub-pixel-rgb.conf
 
 #
+# GUI (GNOME)
+#
+paru -S gnome-shell gdm gnome-control-center gnome-terminal
+
+#
 # GUI (KDE)
 #
-paru -S plasma-desktop plasma-wayland-session plasma-wayland-protocols dbus-python qt6-wayland breeze-gtk kde-gtk-config kscreen libva-mesa-driver mesa-vdpau plasma-nm bluedevil plasma-pa plasma-thunderbolt powerdevil
+paru -S plasma-desktop plasma-wayland-session plasma-wayland-protocols dbus-python qt6-wayland breeze-gtk kde-gtk-config kscreen libva-mesa-driver mesa-vdpau plasma-nm bluedevil plasma-pa plasma-thunderbolt powerdevil konsole dolphin
 
 # Desktop software
-paru -S konsole firefox dolphin bitwarden-bin
+paru -S firefox bitwarden-bin
 # Development software
 paru -S rider dotnet-host dotnet-runtime dotnet-sdk visual-studio-code-bin slack-desktop
