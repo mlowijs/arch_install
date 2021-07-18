@@ -61,6 +61,7 @@ ln -s /usr/share/fontconfig/conf.avail/10-sub-pixel-rgb.conf
 # GUI (GNOME)
 #
 paru -S gnome-shell gdm gnome-control-center gnome-terminal gnome-tweaks xdg-user-dirs-gtk xdg-desktop-portal-gtk
+sudo systemctl enable gdm
 
 #
 # GUI (KDE)
