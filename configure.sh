@@ -78,7 +78,7 @@ sudo systemctl enable gdm
 paru -S plasma-desktop plasma-wayland-session plasma-wayland-protocols dbus-python qt6-wayland breeze-gtk kde-gtk-config kscreen libva-mesa-driver mesa-vdpau plasma-nm bluedevil plasma-pa plasma-thunderbolt powerdevil konsole dolphin
 
 # Desktop software
-paru -S firefox bitwarden-bin
+paru -S firefox intel-media-driver bitwarden-bin
 mkdir -p ~/.config/environment.d
 echo "MOZ_ENABLE_WAYLAND=1" > ~/.config/environment.d/envvars.conf
 
