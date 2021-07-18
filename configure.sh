@@ -2,6 +2,7 @@
 echo "blacklist psmouse" > /etc/modprobe.d/psmouse.conf
 echo "blacklist nouveau" > /etc/modprobe.d/nouveau.conf
 echo "blacklist amdgpu" > /etc/modprobe.d/amdgpu.conf
+echo "options snd_hda_intel power_save=3" > /etc/modprobe.d/snd_hda_intel.conf
 
 # Network and time
 systemctl enable NetworkManager
