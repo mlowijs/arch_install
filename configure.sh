@@ -1,7 +1,6 @@
 # Blacklist modules
 echo "blacklist psmouse" > /etc/modprobe.d/psmouse.conf
 echo "blacklist nouveau" > /etc/modprobe.d/nouveau.conf
-echo "blacklist amdgpu" > /etc/modprobe.d/amdgpu.conf
 echo "options snd_hda_intel power_save=3" > /etc/modprobe.d/snd_hda_intel.conf
 echo "options iwlwifi power_save=1" > /etc/modprobe.d/iwlwifi.conf
 echo "options iwlmvm power_scheme=3" > /etc/modprobe.d/iwlmvm.conf
@@ -68,19 +67,15 @@ sudo snapper -c root create -d "before-gui"
 #
 # GUI (GNOME)
 #
-paru -S gnome-shell gdm gnome-control-center gnome-terminal gnome-tweaks xdg-user-dirs-gtk xdg-desktop-portal-gtk
-paru -S nautilus
+paru -S gnome-shell gdm gnome-control-center gnome-terminal gnome-tweaks xdg-user-dirs-gtk xdg-desktop-portal-gtk libva-mesa-driver mesa-vdpau intel-media-driver
+paru -S nautilus seahorse
 sudo systemctl enable gdm
 
-#
-# GUI (KDE)
-#
-paru -S plasma-desktop plasma-wayland-session plasma-wayland-protocols dbus-python qt6-wayland breeze-gtk kde-gtk-config kscreen libva-mesa-driver mesa-vdpau plasma-nm bluedevil plasma-pa plasma-thunderbolt powerdevil konsole dolphin
+mkdir -p ~/.config/environment.d
+echo "MOZ_ENABLE_WAYLAND=1" >> ~/.config/environment.d/envvars.conf
 
 # Desktop software
-paru -S firefox intel-media-driver bitwarden-bin
-mkdir -p ~/.config/environment.d
-echo "MOZ_ENABLE_WAYLAND=1" > ~/.config/environment.d/envvars.conf
+paru -S firefox bitwarden-bin slack-desktop
 
 # Development software
-paru -S rider dotnet-host dotnet-runtime dotnet-sdk visual-studio-code-bin slack-desktop
+paru -S rider dotnet-host dotnet-runtime dotnet-sdk visual-studio-code-bin
