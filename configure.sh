@@ -78,4 +78,4 @@ echo "MOZ_ENABLE_WAYLAND=1" >> ~/.config/environment.d/envvars.conf
 paru -S firefox bitwarden-bin slack-desktop
 
 # Development software
-paru -S rider dotnet-host dotnet-runtime dotnet-sdk visual-studio-code-bin
+paru -S rider dotnet-host dotnet-runtime dotnet-sdk visual-studio-code-bin nodejs npm
