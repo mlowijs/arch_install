@@ -54,7 +54,7 @@ echo "michielxps15" > /etc/hostname
 nano /etc/hosts
 
 # Mkinitcpio
-nano /etc/mkinitcpio.conf
+nano /etc/mkinitcpio.conf # MODULES=(btrfs i915 thunderbolt amdgpu)
 mkinitcpio -P
 
 # Root password
