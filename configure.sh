@@ -55,7 +55,7 @@ echo "options bbswitch load_state=0 unload_state=1" > /etc/modprobe.d/bbswitch.c
 echo "bbswitch" > /etc/modules-load.d/bbswitch.conf
 
 # Fonts
-paru -S ttf-liberation ttf-dejavu ttf-jetbrains-mono ttf-windows
+paru -S ttf-liberation ttf-dejavu ttf-jetbrains-mono ttf-windows noto-fonts-emoji
 cd /etc/fonts/conf.d
 ln -s /usr/share/fontconfig/conf.avail/10-sub-pixel-rgb.conf
 
