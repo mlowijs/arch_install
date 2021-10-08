@@ -67,15 +67,17 @@ sudo snapper -c root create -d "before-gui"
 #
 # GUI (GNOME)
 #
-paru -S gnome-shell gdm gnome-control-center gnome-terminal gnome-tweaks xdg-user-dirs-gtk xdg-desktop-portal-gtk libva-mesa-driver mesa-vdpau intel-media-driver
+paru -S gnome-shell gdm gnome-control-center gnome-terminal gnome-tweaks xdg-user-dirs-gtk xdg-desktop-portal-gtk libva-mesa-driver mesa-vdpau intel-media-driver iio-sensor-proxy
 paru -S nautilus seahorse
 sudo systemctl enable gdm
 
 mkdir -p ~/.config/environment.d
 echo "MOZ_ENABLE_WAYLAND=1" >> ~/.config/environment.d/envvars.conf
+echo "MOZ_DBUS_REMOTE=1" >> ~/.config/environment.d/envvars.conf
+echo "MOZ_WAYLAND_USE_VAAPI=1" >> ~/.config/environment.d/envvars.conf
 
 # Desktop software
 paru -S firefox bitwarden-bin slack-desktop
 
 # Development software
-paru -S rider dotnet-host dotnet-runtime dotnet-sdk visual-studio-code-bin nodejs npm
+paru -S rider dotnet-host dotnet-runtime dotnet-sdk visual-studio-code-bin nodejs npm postman-bin
