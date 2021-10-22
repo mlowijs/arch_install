@@ -5,6 +5,7 @@ iwctl station wlan0 connect "BS55"
 timedatectl set-ntp true
 
 # Partitioning
+fdisk ${DEVICE}
 
 # Formatting
 mkfs.vfat -n EFI ${DEVICE}p1
