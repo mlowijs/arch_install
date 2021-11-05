@@ -47,7 +47,7 @@ sudo systemctl enable bluetooth
 sudo nano /etc/bluetooth/main.conf # AutoEnable
 
 # Audio
-paru -S pipewire pipewire-alsa pipewire-pulse
+paru -S pipewire pipewire-alsa pipewire-pulse wireplumber
 
 # bbswitch
 paru -S bbswitch-dkms
