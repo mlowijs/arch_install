@@ -26,7 +26,7 @@ exit
 #
 
 # Setup pacman and builds
-sudo nano /etc/pacman.conf # Color
+sudo nano /etc/pacman.conf # Color, ParallelDownloads
 sudo nano /etc/makepkg.conf # MAKEFLAGS
 
 # Setup systemd logind.conf
