@@ -35,7 +35,7 @@ sudo nano /etc/systemd/sleep.conf # HibernateDelaySec
 
 # Install paru
 git clone https://aur.archlinux.org/paru-bin.git
-cd paru
+cd paru-bin
 makepkg -si
 cd
 rm -rf paru
