@@ -34,7 +34,7 @@ sudo nano /etc/systemd/logind.conf # KillUserProcesses, HandlePowerKey, HandleLi
 sudo nano /etc/systemd/sleep.conf # HibernateDelaySec
 
 # Install paru
-git clone https://aur.archlinux.org/paru.git
+git clone https://aur.archlinux.org/paru-bin.git
 cd paru
 makepkg -si
 cd
