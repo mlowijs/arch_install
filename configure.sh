@@ -81,3 +81,13 @@ paru -S firefox bitwarden-bin slack-desktop
 
 # Development software
 paru -S rider dotnet-host dotnet-runtime dotnet-sdk visual-studio-code-bin nodejs npm postman-bin
+
+#
+# GUI (sway)
+#
+paru -S sway swayidle xdg-user-dirs xdg-desktop-portal xdg-desktop-portal-wlr xdg-user-dirs dbus alacritty
+paru -S chromium
+
+mkdir ~/.config
+echo "--enable-features=UseOzonePlatform" >> ~/.config/chromium-flags.conf
+echo "--ozone-platform=wayland" >> ~/.config/chromium-flags.conf
