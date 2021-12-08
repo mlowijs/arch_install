@@ -26,13 +26,13 @@ btrfs su cr @opt
 cd /
 umount /mnt
 
-mount -o noatime,commit=120,compress-force=zstd,space_cache,discard=async,subvol=@ ${DEVICE}p3 /mnt
+mount -o noatime,commit=120,compress-force=zstd,space_cache=v2,discard=async,subvol=@ ${DEVICE}p3 /mnt
 
 cd /mnt
 mkdir boot home opt
 
-mount -o noatime,commit=120,compress-force=zstd,space_cache,discard=async,subvol=@home ${DEVICE}p3 /mnt/home
-mount -o noatime,commit=120,compress-force=zstd,space_cache,discard=async,subvol=@opt ${DEVICE}p3 /mnt/opt
+mount -o noatime,commit=120,compress-force=zstd,space_cache=v2,discard=async,subvol=@home ${DEVICE}p3 /mnt/home
+mount -o noatime,commit=120,compress-force=zstd,space_cache=v2,discard=async,subvol=@opt ${DEVICE}p3 /mnt/opt
 mount ${DEVICE}p1 /mnt/boot
 
 # Install system
