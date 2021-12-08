@@ -52,7 +52,6 @@ echo "LANG=en_US.UTF-8" > /etc/locale.conf
 
 # Hostname
 echo "michielxps15" > /etc/hostname
-nano /etc/hosts
 
 # Mkinitcpio
 nano /etc/mkinitcpio.conf # MODULES=(btrfs i915 thunderbolt amdgpu)
