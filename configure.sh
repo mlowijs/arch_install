@@ -85,7 +85,7 @@ paru -S rider dotnet-host dotnet-runtime dotnet-sdk visual-studio-code-bin nodej
 #
 # GUI (sway)
 #
-paru -S sway swayidle xdg-user-dirs xdg-desktop-portal xdg-desktop-portal-wlr xdg-user-dirs dbus alacritty
+paru -S sway swayidle xdg-user-dirs xdg-desktop-portal xdg-desktop-portal-wlr xdg-user-dirs dbus alacritty waybar wayland-protocols apple-fonts
 paru -S chromium
 
 mkdir ~/.config
