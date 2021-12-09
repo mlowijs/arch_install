@@ -16,7 +16,7 @@ timedatectl set-ntp true
 pacman -Syu
 
 # User
-useradd -mUG wheel -s /bin/bash michiel
+useradd -mUG wheel -s /bin/zsh michiel
 passwd michiel
 EDITOR=nano visudo
 exit
@@ -76,18 +76,17 @@ echo "MOZ_ENABLE_WAYLAND=1" >> ~/.config/environment.d/envvars.conf
 echo "MOZ_DBUS_REMOTE=1" >> ~/.config/environment.d/envvars.conf
 echo "MOZ_WAYLAND_USE_VAAPI=1" >> ~/.config/environment.d/envvars.conf
 
-# Desktop software
-paru -S firefox bitwarden-bin slack-desktop
-
-# Development software
-paru -S rider dotnet-host dotnet-runtime dotnet-sdk visual-studio-code-bin nodejs npm postman-bin
-
 #
 # GUI (sway)
 #
-paru -S sway swayidle xdg-user-dirs xdg-desktop-portal xdg-desktop-portal-wlr xdg-user-dirs dbus alacritty waybar wayland-protocols apple-fonts
-paru -S chromium
+paru -S sway swayidle xdg-user-dirs xdg-desktop-portal xdg-desktop-portal-wlr xdg-user-dirs dbus alacritty wayland-protocols
 
 mkdir ~/.config
 echo "--enable-features=UseOzonePlatform" >> ~/.config/chromium-flags.conf
 echo "--ozone-platform=wayland" >> ~/.config/chromium-flags.conf
+
+# Desktop software
+paru -S chromium bitwarden-bin slack-desktop
+
+# Development software
+paru -S rider dotnet-host dotnet-runtime dotnet-sdk visual-studio-code-bin nodejs npm postman-bin
