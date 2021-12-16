@@ -74,7 +74,7 @@ echo "MOZ_WAYLAND_USE_VAAPI=1" >> ~/.config/environment.d/envvars.conf
 #
 # GUI (sway)
 #
-paru -S sway swayidle xdg-user-dirs xdg-desktop-portal xdg-desktop-portal-wlr xdg-user-dirs dbus alacritty wayland-protocols
+paru -S sway swayidle xdg-user-dirs xdg-desktop-portal xdg-desktop-portal-wlr alacritty wayland-protocols swaylock-effects ulauncher
 
 mkdir ~/.config
 echo "--enable-features=UseOzonePlatform" >> ~/.config/chromium-flags.conf
