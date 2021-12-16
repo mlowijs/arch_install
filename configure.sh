@@ -16,7 +16,7 @@ timedatectl set-ntp true
 pacman -Syu
 
 # User
-useradd -mUG wheel -s /bin/zsh michiel
+useradd -mUG wheel,audio,video,plugdev,input,disk -s /bin/zsh michiel
 passwd michiel
 EDITOR=nano visudo
 exit
@@ -58,11 +58,6 @@ echo "bbswitch" > /etc/modules-load.d/bbswitch.conf
 paru -S ttf-liberation ttf-dejavu ttf-jetbrains-mono ttf-windows noto-fonts-emoji
 cd /etc/fonts/conf.d
 ln -s /usr/share/fontconfig/conf.avail/10-sub-pixel-rgb.conf
-
-# Snapper
-paru -S snapper
-sudo snapper -c root create-config /
-sudo snapper -c root create -d "before-gui"
 
 #
 # GUI (GNOME)
