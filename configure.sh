@@ -35,6 +35,7 @@ sudo sed -i -E 's/#MAKEFLAGS=.+$/MAKEFLAGS="-j4"/' /etc/makepkg.conf
 sudo sed -i -E 's/#KillUserProcesses=.+$/KillUserProcesses=yes/' /etc/systemd/logind.conf
 sudo sed -i -E 's/#HandlePowerKey=.+$/HandlePowerKey=ignore/' /etc/systemd/logind.conf
 sudo sed -i -E 's/#HandleLidSwitch=.+$/HandleLidSwitch=suspend-then-hibernate/' /etc/systemd/logind.conf
+sudo sed -i -E 's/#HandleLidSwitchDocked=.+$/HandleLidSwitchDocked=ignore/' /etc/systemd/logind.conf
 
 sudo sed -i -E 's/#HibernateDelaySec=.+$/HibernateDelaySec=60min/' /etc/systemd/sleep.conf
 
