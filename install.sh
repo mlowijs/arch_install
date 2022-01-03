@@ -80,7 +80,7 @@ title Arch Linux
 linux /vmlinuz-linux-zen
 initrd /intel-ucode.img
 initrd /initramfs-linux-zen.img
-options root=LABEL=root rootflags=subvol=@ resume=LABEL=swap rw nowatchdog
+options root=LABEL=root rootflags=subvol=@ resume=LABEL=swap rw nowatchdog ${KERNEL_OPTIONS}
 EOF
 
 # Reboot
