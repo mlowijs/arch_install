@@ -85,5 +85,4 @@ EOF
 
 # Reboot
 cd
-umount -R /mnt
-reboot
+echo "Unmount /mnt and reboot to complete installation"
