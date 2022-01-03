@@ -7,7 +7,7 @@ echo "options iwlmvm power_scheme=3" > /etc/modprobe.d/iwlmvm.conf
 
 # Network and time
 systemctl enable --now NetworkManager
-nmcli d wifi connect "BS55" password xxx
+nmcli d wifi connect "BS55" password $1
 
 timedatectl set-ntp true
 
@@ -15,22 +15,22 @@ timedatectl set-ntp true
 pacman -Syu
 
 # User
-useradd -mUG wheel,audio,video,plugdev,input,disk -s /bin/zsh michiel
+useradd -mUG wheel,audio,video,input,disk -s /bin/zsh michiel
 passwd michiel
-EDITOR=nano visudo
-exit
-
-#
-# Login as michiel
-#
+echo '%wheel ALL=(ALL) ALL' > /etc/sudoers.d/wheel
+su - michiel
 
 # Setup pacman and builds
-sudo nano /etc/pacman.conf # Color, ParallelDownloads
-sudo nano /etc/makepkg.conf # MAKEFLAGS
+sed -i -E 's/#Color/Color/' /etc/pacman.conf
+sed -i -E 's/#ParallelDownloads/ParallelDownloads/' /etc/pacman.conf
+sed -i -E 's/#MAKEFLAGS=.+$/MAKEFLAGS="-j4"/' /etc/makepkg.conf
 
 # Setup systemd logind.conf
-sudo nano /etc/systemd/logind.conf # KillUserProcesses, HandlePowerKey, HandleLidSwitch (suspend-then-hibernate)
-sudo nano /etc/systemd/sleep.conf # HibernateDelaySec
+sed -i -E 's/#KillUserProcesses=.+$/KillUserProcesses=yes/' /etc/systemd/logind.conf
+sed -i -E 's/#HandlePowerKey=.+$/HandlePowerKey=ignore/' /etc/systemd/logind.conf
+sed -i -E 's/#HandleLidSwitch=.+$/HandleLidSwitch=suspend-then-hibernate/' /etc/systemd/logind.conf
+
+sed -i -E 's/#HibernateDelaySec=.+$/HibernateDelaySec=60min/' /etc/systemd/sleep.conf
 
 # Install paru
 git clone https://aur.archlinux.org/paru-bin.git
@@ -38,37 +38,39 @@ cd paru-bin
 makepkg -si
 cd
 rm -rf paru
-sudo nano /etc/paru.conf # BottomUp, NewsOnUpgrade
+
+sed -i -E 's/#BottomUp/BottomUp/' /etc/paru.conf
+sed -i -E 's/#NewsOnUpgrade/NewsOnUpgrade/' /etc/paru.conf
 
 # Bluetooth
-paru -S bluez bluez-utils
-sudo systemctl enable bluetooth
-sudo nano /etc/bluetooth/main.conf # AutoEnable
+paru -S --noconfirm bluez bluez-utils
+sed -i -E 's/#AutoEnable=.+$/AutoEnable=true/' /etc/bluetooth/main.conf
+systemctl enable --now bluetooth
 
 # Audio
-paru -S pipewire pipewire-alsa pipewire-pulse pipewire-media-session
+paru -S --noconfirm pipewire pipewire-alsa pipewire-pulse pipewire-media-session
 
 # bbswitch
-paru -S bbswitch-dkms
+paru -S --noconfirm bbswitch-dkms
 echo "options bbswitch load_state=0 unload_state=1" > /etc/modprobe.d/bbswitch.conf
 echo "bbswitch" > /etc/modules-load.d/bbswitch.conf
 
 # Fonts
-paru -S ttf-liberation ttf-windows noto-fonts-emoji ttf-ibm-plex
+paru -S --noconfirm ttf-liberation ttf-windows noto-fonts-emoji ttf-ibm-plex
 
 # Miscellaneous system tools
-paru -S systemd-boot-pacman-hook
+paru -S --noconfirm systemd-boot-pacman-hook
 
 #
 # GUI (KDE)
 #
-paru -S plasma-desktop plasma-wayland-session sddm sddm-kcm powerdevil bluedevil kscreen plasma-nm plasma-pa konsole xdg-user-dirs xdg-desktop-portal xdg-desktop-portal-kde
-paru -S kwallet-pam ksshaskpass kwalletmanager
-paru -S iio-sensor-proxy libva-vdpau-driver intel-media-driver
-sudo systemctl enable sddm
+paru -S --noconfirm plasma-desktop plasma-wayland-session sddm sddm-kcm powerdevil bluedevil kscreen plasma-nm plasma-pa konsole xdg-user-dirs xdg-desktop-portal xdg-desktop-portal-kde
+paru -S --noconfirm kwallet-pam ksshaskpass kwalletmanager
+paru -S --noconfirm iio-sensor-proxy intel-media-driver libva-vdpau-driver
+systemctl enable sddm
 
 mkdir -p ~/.config/systemd/user
-cat <<EOF > ssh-agent.service
+cat <<EOF > ~/.config/systemd/user/ssh-agent.service
 [Unit]
 Description=SSH key agent
 
@@ -84,7 +86,7 @@ EOF
 systemctl --user enable ssh-agent
 
 mkdir -p ~/.config/autostart
-cat <<EOF > ssh-add.desktop
+cat <<EOF > ~/.config/autostart/ssh-add.desktop
 [Desktop Entry]
 Exec=ssh-add -q ~/.ssh/id_rsa ~/.ssh/id_ed25519
 Name=ssh-add
@@ -92,7 +94,7 @@ Type=Application
 EOF
 
 mkdir -p ~/.config/plasma-workspace/env
-cat <<EOF > askpass.sh
+cat <<EOF > ~/.config/plasma-workspace/env/askpass.sh
 #!/bin/sh
 export SSH_ASKPASS='/usr/bin/ksshaskpass'
 export GIT_ASKPASS='/usr/bin/ksshaskpass'
