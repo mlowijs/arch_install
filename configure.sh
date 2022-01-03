@@ -46,7 +46,7 @@ sudo systemctl enable bluetooth
 sudo nano /etc/bluetooth/main.conf # AutoEnable
 
 # Audio
-paru -S pipewire pipewire-alsa pipewire-pulse wireplumber
+paru -S pipewire pipewire-alsa pipewire-pulse pipewire-media-session
 
 # bbswitch
 paru -S bbswitch-dkms
@@ -54,9 +54,49 @@ echo "options bbswitch load_state=0 unload_state=1" > /etc/modprobe.d/bbswitch.c
 echo "bbswitch" > /etc/modules-load.d/bbswitch.conf
 
 # Fonts
-paru -S ttf-liberation ttf-dejavu ttf-jetbrains-mono ttf-windows noto-fonts-emoji
-cd /etc/fonts/conf.d
-ln -s /usr/share/fontconfig/conf.avail/10-sub-pixel-rgb.conf
+paru -S ttf-liberation ttf-windows noto-fonts-emoji ttf-ibm-plex
+
+# Miscellaneous system tools
+paru -S systemd-boot-pacman-hook
+
+#
+# GUI (KDE)
+#
+paru -S plasma-desktop plasma-wayland-session sddm sddm-kcm powerdevil bluedevil kscreen plasma-nm plasma-pa konsole xdg-user-dirs xdg-desktop-portal xdg-desktop-portal-kde
+paru -S kwallet-pam ksshaskpass kwalletmanager
+paru -S iio-sensor-proxy libva-vdpau-driver intel-media-driver
+sudo systemctl enable sddm
+
+mkdir -p ~/.config/systemd/user
+cat <<EOF > ssh-agent.service
+[Unit]
+Description=SSH key agent
+
+[Service]
+Type=simple
+Environment=SSH_AUTH_SOCK=%t/ssh-agent.socket
+ExecStart=/usr/bin/ssh-agent -D -a $SSH_AUTH_SOCK
+
+[Install]
+WantedBy=default.target
+EOF
+
+systemctl --user enable ssh-agent
+
+mkdir -p ~/.config/autostart
+cat <<EOF > ssh-add.desktop
+[Desktop Entry]
+Exec=ssh-add -q ~/.ssh/id_rsa ~/.ssh/id_ed25519
+Name=ssh-add
+Type=Application
+EOF
+
+mkdir -p ~/.config/plasma-workspace/env
+cat <<EOF > askpass.sh
+#!/bin/sh
+export SSH_ASKPASS='/usr/bin/ksshaskpass'
+export GIT_ASKPASS='/usr/bin/ksshaskpass'
+EOF
 
 #
 # GUI (GNOME)
@@ -65,22 +105,21 @@ paru -S gnome-shell gdm gnome-control-center gnome-terminal gnome-tweaks xdg-use
 paru -S nautilus seahorse
 sudo systemctl enable gdm
 
-mkdir -p ~/.config/environment.d
-echo "MOZ_ENABLE_WAYLAND=1" >> ~/.config/environment.d/envvars.conf
-echo "MOZ_DBUS_REMOTE=1" >> ~/.config/environment.d/envvars.conf
-echo "MOZ_WAYLAND_USE_VAAPI=1" >> ~/.config/environment.d/envvars.conf
-
 #
 # GUI (sway)
 #
 paru -S sway swayidle xdg-user-dirs xdg-desktop-portal xdg-desktop-portal-wlr alacritty wayland-protocols swaylock-effects ulauncher
 
-mkdir ~/.config
+#
+# GUI settings
+#
+
+#
+# Software
+#
+paru -S chromium bitwarden-bin slack-desktop
+paru -S rider dotnet-host dotnet-runtime dotnet-sdk visual-studio-code-bin nodejs npm postman-bin
+
+mkdir -p ~/.config
 echo "--enable-features=UseOzonePlatform" >> ~/.config/chromium-flags.conf
 echo "--ozone-platform=wayland" >> ~/.config/chromium-flags.conf
-
-# Desktop software
-paru -S chromium bitwarden-bin slack-desktop
-
-# Development software
-paru -S rider dotnet-host dotnet-runtime dotnet-sdk visual-studio-code-bin nodejs npm postman-bin

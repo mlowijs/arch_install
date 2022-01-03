@@ -1,14 +1,8 @@
-DEVICE=/dev/nvme1n1
-BOOT_PARTITION=${DEVICE}p1
-SWAP_PARTITION=${DEVICE}p2
-ROOT_PARTITION=${DEVICE}p3
-SWAP_SIZE=32G
+source $1
 
 BTRFS_MOUNT_OPTS='noatime,commit=120,compress-force=zstd,space_cache=v2,discard=async'
-HOSTNAME=michielxps15
 
 # Connect to internet and set time
-iwctl station wlan0 connect "BS55"
 timedatectl set-ntp true
 
 # Partitioning
@@ -44,7 +38,7 @@ mount -o discard ${BOOT_PARTITION} /mnt/boot
 
 # Install system
 sed -i -E 's/#ParallelDownloads/ParallelDownloads/' /etc/pacman.conf
-pacstrap /mnt base linux-zen linux-zen-headers linux-firmware btrfs-progs sudo base-devel networkmanager nano intel-ucode git sof-firmware man-db man-pages zsh
+pacstrap /mnt base linux-zen linux-zen-headers linux-firmware btrfs-progs sudo base-devel networkmanager nano intel-ucode git sof-firmware man-db man-pages zsh openssh
 genfstab -L /mnt >> /mnt/etc/fstab
 
 #
