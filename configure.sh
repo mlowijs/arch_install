@@ -112,7 +112,7 @@ EOF
 #
 # Software
 #
-paru -S --noconfirm chromium bitwarden-bin slack-desktop
+paru -S --noconfirm chromium bitwarden-bin slack-desktop thunderbird
 paru -S --noconfirm rider dotnet-host dotnet-runtime dotnet-sdk visual-studio-code-bin nodejs npm postman-bin
 
 #
