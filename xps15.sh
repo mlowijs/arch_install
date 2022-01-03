@@ -6,3 +6,4 @@ export SWAP_SIZE=32G
 export HOSTNAME=michielxps15
 export EXTRA_PACKAGES="networkmanager"
 export MICROCODE_PKG="intel-ucode"
+export EXTRA_MODULES="i915"

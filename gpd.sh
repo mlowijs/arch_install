@@ -7,3 +7,4 @@ export HOSTNAME=michielgpd
 export KERNEL_OPTIONS='fbcon=rotate:1'
 export EXTRA_PACKAGES="networkmanager"
 export MICROCODE_PKG="intel-ucode"
+export EXTRA_MODULES="i915"
