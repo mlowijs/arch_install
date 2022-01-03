@@ -6,8 +6,7 @@ echo "options iwlwifi power_save=1" > /etc/modprobe.d/iwlwifi.conf
 echo "options iwlmvm power_scheme=3" > /etc/modprobe.d/iwlmvm.conf
 
 # Network and time
-systemctl enable NetworkManager
-systemctl start NetworkManager
+systemctl enable --now NetworkManager
 nmcli d wifi connect "BS55" password xxx
 
 timedatectl set-ntp true
