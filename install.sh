@@ -34,7 +34,7 @@ umount /mnt
 mount -o ${BTRFS_MOUNT_OPTS},subvol=@ ${ROOT_PARTITION} /mnt
 
 cd /mnt
-mkdir boot home opt
+mkdir boot home
 
 mount -o ${BTRFS_MOUNT_OPTS},subvol=@home ${ROOT_PARTITION} /mnt/home
 mount -o discard ${BOOT_PARTITION} /mnt/boot
