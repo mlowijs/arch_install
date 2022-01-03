@@ -4,5 +4,3 @@ export SWAP_PARTITION=${DEVICE}p2
 export ROOT_PARTITION=${DEVICE}p3
 export SWAP_SIZE=32G
 export HOSTNAME=michielxps15
-
-iwctl station wlan0 connect "BS55"
