@@ -5,6 +5,7 @@ ROOT_PARTITION=${DEVICE}p3
 SWAP_SIZE=32G
 
 BTRFS_MOUNT_OPTS='noatime,commit=120,compress-force=zstd,space_cache=v2,discard=async'
+HOSTNAME=michielxps15
 
 # Connect to internet and set time
 iwctl station wlan0 connect "BS55"
@@ -60,7 +61,7 @@ arch-chroot /mnt locale-gen
 echo "LANG=en_US.UTF-8" > /mnt/etc/locale.conf
 
 # Hostname
-echo "michielxps15" > /mnt/etc/hostname
+echo ${HOSTNAME} > /mnt/etc/hostname
 
 # Mkinitcpio
 sed -i -E 's/MODULES=\(\)/MODULES=(btrfs i915)/' /mnt/etc/mkinitcpio.conf
