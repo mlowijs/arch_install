@@ -5,3 +5,5 @@ export ROOT_PARTITION=${DEVICE}3
 export SWAP_SIZE=8G
 export HOSTNAME=michielgpd
 export KERNEL_OPTIONS='fbcon=rotate:1'
+export EXTRA_PACKAGES="networkmanager"
+export MICROCODE_PKG="intel-ucode"

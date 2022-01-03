@@ -1,8 +1,7 @@
-export DEVICE=/dev/nvme1n1
+export DEVICE=/dev/nvme0n1
 export BOOT_PARTITION=${DEVICE}p1
 export SWAP_PARTITION=${DEVICE}p2
 export ROOT_PARTITION=${DEVICE}p3
 export SWAP_SIZE=32G
-export HOSTNAME=michielxps15
-export EXTRA_PACKAGES="networkmanager"
+export HOSTNAME=michieldesktop
 export MICROCODE_PKG="intel-ucode"

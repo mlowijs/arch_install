@@ -38,7 +38,7 @@ mount -o discard ${BOOT_PARTITION} /mnt/boot
 
 # Install system
 sed -i -E 's/#ParallelDownloads/ParallelDownloads/' /etc/pacman.conf
-pacstrap /mnt base linux-zen linux-zen-headers linux-firmware btrfs-progs sudo base-devel networkmanager nano intel-ucode git sof-firmware man-db man-pages zsh openssh
+pacstrap /mnt base linux-zen linux-zen-headers linux-firmware btrfs-progs sudo base-devel nano git sof-firmware man-db man-pages zsh openssh ${MICROCODE_PKG} ${EXTRA_PACKAGES}
 genfstab -L /mnt >> /mnt/etc/fstab
 
 #
@@ -85,7 +85,7 @@ EOF
 cat << EOF > /mnt/boot/loader/entries/arch.conf
 title Arch Linux
 linux /vmlinuz-linux-zen
-initrd /intel-ucode.img
+initrd /${MICROCODE_PKG}.img
 initrd /initramfs-linux-zen.img
 options root=LABEL=root rootflags=subvol=@ resume=LABEL=swap rw nowatchdog ${KERNEL_OPTIONS}
 EOF
