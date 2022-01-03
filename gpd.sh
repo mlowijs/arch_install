@@ -5,5 +5,3 @@ export ROOT_PARTITION=${DEVICE}3
 export SWAP_SIZE=8G
 export HOSTNAME=michielgpd
 export KERNEL_OPTIONS='fbcon=rotate:1'
-
-iwctl station wlan0 connect "BS55"
