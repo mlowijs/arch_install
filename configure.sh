@@ -78,7 +78,6 @@ sudo systemctl enable sddm
 #
 # KDE configuration
 #
-
 mkdir -p ~/.config/systemd/user
 cat <<EOF > ~/.config/systemd/user/ssh-agent.service
 [Unit]
@@ -113,8 +112,8 @@ EOF
 #
 # Software
 #
-paru -S chromium bitwarden-bin slack-desktop
-paru -S rider dotnet-host dotnet-runtime dotnet-sdk visual-studio-code-bin nodejs npm postman-bin
+paru -S --noconfirm chromium bitwarden-bin slack-desktop
+paru -S --noconfirm rider dotnet-host dotnet-runtime dotnet-sdk visual-studio-code-bin nodejs npm postman-bin
 
 #
 # Software settings
