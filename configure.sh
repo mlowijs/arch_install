@@ -54,7 +54,7 @@ sudo sed -i -E 's/#AutoEnable=.+$/AutoEnable=true/' /etc/bluetooth/main.conf
 sudo systemctl enable --now bluetooth
 
 # Audio
-paru -S --noconfirm pipewire pipewire-alsa pipewire-pulse pipewire-media-session
+paru -S --noconfirm pipewire pipewire-alsa pipewire-pulse wireplumber
 
 # bbswitch
 paru -S --noconfirm bbswitch-dkms
