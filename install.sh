@@ -65,6 +65,11 @@ arch-chroot /mnt mkinitcpio -P
 # Root password
 arch-chroot /mnt passwd
 
+# User
+arch-chroot /mnt useradd -mUG wheel,audio,video,input,disk -s /bin/zsh michiel
+arch-chroot /mnt passwd michiel
+echo "%wheel ALL=(ALL) ALL" > /mnt/etc/sudoers.d/wheel
+
 # Boot loader
 arch-chroot /mnt bootctl install
 

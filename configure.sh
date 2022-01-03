@@ -1,36 +1,42 @@
+# Setup shell
+cat <<EOF >> ~/.zshrc
+PS1='%n@%m %F{blue}%~ %f$ '
+
+bindkey "^[[H" beginning-of-line
+bindkey "^[[F" end-of-line
+bindkey "^[[3~" delete-char
+bindkey ";5C" forward-word
+bindkey ";5D" backward-word
+
+alias ls="ls --color"
+EOF
+
+source ~/.zshrc
+
 # Blacklist modules
-echo "blacklist psmouse" > /etc/modprobe.d/psmouse.conf
-echo "blacklist nouveau" > /etc/modprobe.d/nouveau.conf
-echo "options snd_hda_intel power_save=3" > /etc/modprobe.d/snd_hda_intel.conf
-echo "options iwlwifi power_save=1" > /etc/modprobe.d/iwlwifi.conf
-echo "options iwlmvm power_scheme=3" > /etc/modprobe.d/iwlmvm.conf
+sudo echo "blacklist psmouse" > /etc/modprobe.d/psmouse.conf
+sudo echo "blacklist nouveau" > /etc/modprobe.d/nouveau.conf
+sudo echo "options snd_hda_intel power_save=3" > /etc/modprobe.d/snd_hda_intel.conf
+sudo echo "options iwlwifi power_save=1" > /etc/modprobe.d/iwlwifi.conf
+sudo echo "options iwlmvm power_scheme=3" > /etc/modprobe.d/iwlmvm.conf
 
 # Network and time
-systemctl enable --now NetworkManager
-nmcli d wifi connect "BS55" password $1
+sudo systemctl enable --now NetworkManager
+sudo nmcli d wifi connect "BS55" password $1
 
-timedatectl set-ntp true
-
-# Update system (just to be sure)
-pacman -Syu
-
-# User
-useradd -mUG wheel,audio,video,input,disk -s /bin/zsh michiel
-passwd michiel
-echo '%wheel ALL=(ALL) ALL' > /etc/sudoers.d/wheel
-su - michiel
+sudo timedatectl set-ntp true
 
 # Setup pacman and builds
-sed -i -E 's/#Color/Color/' /etc/pacman.conf
-sed -i -E 's/#ParallelDownloads/ParallelDownloads/' /etc/pacman.conf
-sed -i -E 's/#MAKEFLAGS=.+$/MAKEFLAGS="-j4"/' /etc/makepkg.conf
+sudo sed -i -E 's/#Color/Color/' /etc/pacman.conf
+sudo sed -i -E 's/#ParallelDownloads/ParallelDownloads/' /etc/pacman.conf
+sudo sed -i -E 's/#MAKEFLAGS=.+$/MAKEFLAGS="-j4"/' /etc/makepkg.conf
 
 # Setup systemd logind.conf
-sed -i -E 's/#KillUserProcesses=.+$/KillUserProcesses=yes/' /etc/systemd/logind.conf
-sed -i -E 's/#HandlePowerKey=.+$/HandlePowerKey=ignore/' /etc/systemd/logind.conf
-sed -i -E 's/#HandleLidSwitch=.+$/HandleLidSwitch=suspend-then-hibernate/' /etc/systemd/logind.conf
+sudo sed -i -E 's/#KillUserProcesses=.+$/KillUserProcesses=yes/' /etc/systemd/logind.conf
+sudo sed -i -E 's/#HandlePowerKey=.+$/HandlePowerKey=ignore/' /etc/systemd/logind.conf
+sudo sed -i -E 's/#HandleLidSwitch=.+$/HandleLidSwitch=suspend-then-hibernate/' /etc/systemd/logind.conf
 
-sed -i -E 's/#HibernateDelaySec=.+$/HibernateDelaySec=60min/' /etc/systemd/sleep.conf
+sudo sed -i -E 's/#HibernateDelaySec=.+$/HibernateDelaySec=60min/' /etc/systemd/sleep.conf
 
 # Install paru
 git clone https://aur.archlinux.org/paru-bin.git
@@ -39,21 +45,21 @@ makepkg -si
 cd
 rm -rf paru
 
-sed -i -E 's/#BottomUp/BottomUp/' /etc/paru.conf
-sed -i -E 's/#NewsOnUpgrade/NewsOnUpgrade/' /etc/paru.conf
+sudo sed -i -E 's/#BottomUp/BottomUp/' /etc/paru.conf
+sudo sed -i -E 's/#NewsOnUpgrade/NewsOnUpgrade/' /etc/paru.conf
 
 # Bluetooth
 paru -S --noconfirm bluez bluez-utils
-sed -i -E 's/#AutoEnable=.+$/AutoEnable=true/' /etc/bluetooth/main.conf
-systemctl enable --now bluetooth
+sudo sed -i -E 's/#AutoEnable=.+$/AutoEnable=true/' /etc/bluetooth/main.conf
+sudo systemctl enable --now bluetooth
 
 # Audio
 paru -S --noconfirm pipewire pipewire-alsa pipewire-pulse pipewire-media-session
 
 # bbswitch
 paru -S --noconfirm bbswitch-dkms
-echo "options bbswitch load_state=0 unload_state=1" > /etc/modprobe.d/bbswitch.conf
-echo "bbswitch" > /etc/modules-load.d/bbswitch.conf
+sudo echo "options bbswitch load_state=0 unload_state=1" > /etc/modprobe.d/bbswitch.conf
+sudo echo "bbswitch" > /etc/modules-load.d/bbswitch.conf
 
 # Fonts
 paru -S --noconfirm ttf-liberation ttf-windows noto-fonts-emoji ttf-ibm-plex
@@ -67,7 +73,11 @@ paru -S --noconfirm systemd-boot-pacman-hook
 paru -S --noconfirm plasma-desktop plasma-wayland-session sddm sddm-kcm powerdevil bluedevil kscreen plasma-nm plasma-pa konsole xdg-user-dirs xdg-desktop-portal xdg-desktop-portal-kde
 paru -S --noconfirm kwallet-pam ksshaskpass kwalletmanager
 paru -S --noconfirm iio-sensor-proxy intel-media-driver libva-vdpau-driver
-systemctl enable sddm
+sudo systemctl enable sddm
+
+#
+# KDE configuration
+#
 
 mkdir -p ~/.config/systemd/user
 cat <<EOF > ~/.config/systemd/user/ssh-agent.service
@@ -101,27 +111,14 @@ export GIT_ASKPASS='/usr/bin/ksshaskpass'
 EOF
 
 #
-# GUI (GNOME)
-#
-paru -S gnome-shell gdm gnome-control-center gnome-terminal gnome-tweaks xdg-user-dirs-gtk xdg-desktop-portal-gtk libva-mesa-driver mesa-vdpau intel-media-driver iio-sensor-proxy
-paru -S nautilus seahorse
-sudo systemctl enable gdm
-
-#
-# GUI (sway)
-#
-paru -S sway swayidle xdg-user-dirs xdg-desktop-portal xdg-desktop-portal-wlr alacritty wayland-protocols swaylock-effects ulauncher
-
-#
-# GUI settings
-#
-
-#
 # Software
 #
 paru -S chromium bitwarden-bin slack-desktop
 paru -S rider dotnet-host dotnet-runtime dotnet-sdk visual-studio-code-bin nodejs npm postman-bin
 
+#
+# Software settings
+#
 mkdir -p ~/.config
 echo "--enable-features=UseOzonePlatform" >> ~/.config/chromium-flags.conf
 echo "--ozone-platform=wayland" >> ~/.config/chromium-flags.conf
