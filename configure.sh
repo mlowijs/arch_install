@@ -111,6 +111,8 @@ export SSH_ASKPASS='/usr/bin/ksshaskpass'
 export GIT_ASKPASS='/usr/bin/ksshaskpass'
 EOF
 
+echo 'export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"' >> ~/.zprofile
+
 #
 # Software
 #
