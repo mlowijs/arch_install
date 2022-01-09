@@ -81,7 +81,7 @@ sudo systemctl enable sddm
 # KDE configuration
 #
 mkdir -p ~/.config/systemd/user
-cat <<EOF > ~/.config/systemd/user/ssh-agent.service
+cat <<'EOF' > ~/.config/systemd/user/ssh-agent.service
 [Unit]
 Description=SSH key agent
 
