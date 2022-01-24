@@ -82,7 +82,6 @@ cat << EOF > /mnt/boot/loader/loader.conf
 timeout 1
 console-mode 1
 default arch.conf
-editor yes
 EOF
 
 cat << EOF > /mnt/boot/loader/entries/arch.conf
