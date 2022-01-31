@@ -92,6 +92,8 @@ initrd /initramfs-linux-zen.img
 options root=LABEL=root rootflags=subvol=@ resume=LABEL=swap rw nowatchdog ${KERNEL_OPTIONS}
 EOF
 
+arch-chroot /mnt systemctl enable systemd-boot-update.service
+
 # Reboot
 cd
 echo "Unmount /mnt and reboot to complete installation"
