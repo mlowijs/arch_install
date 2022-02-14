@@ -72,7 +72,6 @@ paru -S --noconfirm systemd-boot-pacman-hook
 # GUI (KDE)
 #
 paru -S --noconfirm plasma-desktop plasma-wayland-session sddm sddm-kcm powerdevil bluedevil kscreen plasma-nm plasma-pa konsole xdg-user-dirs xdg-desktop-portal xdg-desktop-portal-kde breeze-gtk
-paru -S spectacle
 paru -S --noconfirm kwallet-pam ksshaskpass kwalletmanager
 paru -S --noconfirm iio-sensor-proxy intel-media-driver libva-vdpau-driver
 sudo systemctl enable sddm
@@ -118,6 +117,11 @@ echo 'export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"' >> ~/.zprofile
 #
 paru -S --noconfirm chromium bitwarden-bin slack-desktop thunderbird spotify
 paru -S --noconfirm rider dotnet-host dotnet-runtime dotnet-sdk visual-studio-code-bin nodejs npm postman-bin
+
+#
+# Tools
+#
+paru -S --noconfirm spectacle ark
 
 #
 # Software settings
