@@ -112,7 +112,7 @@ echo 'export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"' >> ~/.zprofile
 #
 # Software
 #
-paru -S --noconfirm chromium bitwarden-bin slack-desktop thunderbird spotify
+paru -S --noconfirm chromium bitwarden slack-desktop thunderbird spotify
 paru -S --noconfirm rider dotnet-host dotnet-runtime dotnet-sdk visual-studio-code-bin nodejs npm postman-bin
 
 #
