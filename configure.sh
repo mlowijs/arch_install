@@ -65,9 +65,6 @@ sudo echo "bbswitch" > /etc/modules-load.d/bbswitch.conf
 # Fonts
 paru -S --noconfirm ttf-liberation ttf-windows noto-fonts-emoji ttf-ibm-plex
 
-# Miscellaneous system tools
-paru -S --noconfirm systemd-boot-pacman-hook
-
 #
 # GUI (KDE)
 #
