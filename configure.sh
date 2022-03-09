@@ -44,7 +44,7 @@ git clone https://aur.archlinux.org/paru-bin.git
 cd paru-bin
 makepkg -si
 cd
-rm -rf paru
+rm -rf paru-bin
 
 sudo sed -i -E 's/#BottomUp/BottomUp/' /etc/paru.conf
 sudo sed -i -E 's/#NewsOnUpgrade/NewsOnUpgrade/' /etc/paru.conf
