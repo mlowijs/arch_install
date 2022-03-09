@@ -6,3 +6,4 @@ export SWAP_SIZE=32G
 export HOSTNAME=michieldesktop
 export MICROCODE_PKG="amd-ucode"
 export EXTRA_MODULES="amdgpu"
+export EXTRA_PACKAGES="networkmanager"
