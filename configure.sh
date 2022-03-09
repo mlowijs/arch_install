@@ -43,7 +43,7 @@ sudo sed -i -E 's/#HibernateDelaySec=.+$/HibernateDelaySec=60min/' /etc/systemd/
 git clone https://aur.archlinux.org/paru-bin.git
 cd paru-bin
 makepkg -si
-cd
+cd ..
 rm -rf paru-bin
 
 sudo sed -i -E 's/#BottomUp/BottomUp/' /etc/paru.conf
