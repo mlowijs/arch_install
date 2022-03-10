@@ -33,10 +33,10 @@ mount -o ${BTRFS_MOUNT_OPTS},subvol=@ ${ROOT_PARTITION} /mnt
 
 cd /mnt
 mkdir boot home
-mkdir -p /var/cache/pacman/pkg
+mkdir -p var/cache/pacman/pkg
 
 mount -o ${BTRFS_MOUNT_OPTS},subvol=@home ${ROOT_PARTITION} /mnt/home
-mount -o ${BTRFS_MOUNT_OPTS},subvol=@pkgcache ${ROOT_PARTITION} /var/cache/pacman/pkg
+mount -o ${BTRFS_MOUNT_OPTS},subvol=@pkgcache ${ROOT_PARTITION} /mnt/var/cache/pacman/pkg
 mount -o discard ${BOOT_PARTITION} /mnt/boot
 
 # Install system
