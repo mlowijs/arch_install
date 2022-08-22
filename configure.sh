@@ -14,11 +14,11 @@ EOF
 source ~/.zshrc
 
 # Blacklist modules
-sudo echo "blacklist psmouse" > /etc/modprobe.d/psmouse.conf
-sudo echo "blacklist nouveau" > /etc/modprobe.d/nouveau.conf
-sudo echo "options snd_hda_intel power_save=3" > /etc/modprobe.d/snd_hda_intel.conf
-sudo echo "options iwlwifi power_save=1" > /etc/modprobe.d/iwlwifi.conf
-sudo echo "options iwlmvm power_scheme=3" > /etc/modprobe.d/iwlmvm.conf
+echo "blacklist psmouse" | sudo tee /etc/modprobe.d/psmouse.conf
+echo "blacklist nouveau" | sudo tee /etc/modprobe.d/nouveau.conf
+echo "options snd_hda_intel power_save=3" | sudo tee /etc/modprobe.d/snd_hda_intel.conf
+echo "options iwlwifi power_save=1" | sudo tee /etc/modprobe.d/iwlwifi.conf
+echo "options iwlmvm power_scheme=3" | sudo tee /etc/modprobe.d/iwlmvm.conf
 
 # Network and time
 sudo systemctl enable --now NetworkManager
@@ -51,7 +51,6 @@ sudo sed -i -E 's/#NewsOnUpgrade/NewsOnUpgrade/' /etc/paru.conf
 
 # Bluetooth
 paru -S --noconfirm bluez bluez-utils
-sudo sed -i -E 's/#AutoEnable=.+$/AutoEnable=true/' /etc/bluetooth/main.conf
 sudo systemctl enable --now bluetooth
 
 # Audio
@@ -59,8 +58,8 @@ paru -S --noconfirm pipewire pipewire-alsa pipewire-pulse wireplumber
 
 # bbswitch
 paru -S --noconfirm bbswitch-dkms
-sudo echo "options bbswitch load_state=0 unload_state=1" > /etc/modprobe.d/bbswitch.conf
-sudo echo "bbswitch" > /etc/modules-load.d/bbswitch.conf
+echo "options bbswitch load_state=0 unload_state=1" | sudo tee /etc/modprobe.d/bbswitch.conf
+echo "bbswitch" | sudo tee /etc/modules-load.d/bbswitch.conf
 
 # Fonts
 paru -S --noconfirm ttf-liberation ttf-windows noto-fonts-emoji ttf-ibm-plex
@@ -71,6 +70,7 @@ paru -S --noconfirm ttf-liberation ttf-windows noto-fonts-emoji ttf-ibm-plex
 paru -S --noconfirm plasma-desktop plasma-wayland-session sddm sddm-kcm powerdevil bluedevil kscreen plasma-nm plasma-pa konsole xdg-user-dirs xdg-desktop-portal xdg-desktop-portal-kde breeze-gtk
 paru -S --noconfirm kwallet-pam ksshaskpass kwalletmanager
 paru -S --noconfirm iio-sensor-proxy intel-media-driver libva-vdpau-driver
+paru -S --noconfirm spectacle ark
 sudo systemctl enable sddm
 
 #
@@ -100,14 +100,17 @@ Name=ssh-add
 Type=Application
 EOF
 
+echo 'export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"' >> ~/.zprofile
+
 mkdir -p ~/.config/plasma-workspace/env
-cat <<EOF > ~/.config/plasma-workspace/env/askpass.sh
+cat <<EOF > ~/.config/plasma-workspace/env/envvars.sh
 #!/bin/sh
 export SSH_ASKPASS='/usr/bin/ksshaskpass'
 export GIT_ASKPASS='/usr/bin/ksshaskpass'
+export MOZ_ENABLE_WAYLAND=1
 EOF
 
-echo 'export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"' >> ~/.zprofile
+chmod +x ~/.config/plasma-workspace/env/envvars.sh
 
 #
 # Software
@@ -116,13 +119,8 @@ paru -S --noconfirm chromium bitwarden slack-desktop thunderbird spotify
 paru -S --noconfirm rider dotnet-host dotnet-runtime dotnet-sdk visual-studio-code-bin nodejs npm postman-bin
 
 #
-# Tools
-#
-paru -S --noconfirm spectacle ark
-
-#
 # Software settings
 #
 mkdir -p ~/.config
-echo "--enable-features=UseOzonePlatform" >> ~/.config/chromium-flags.conf
-echo "--ozone-platform=wayland" >> ~/.config/chromium-flags.conf
+echo "--enable-features=UseOzonePlatform" | tee ~/.config/chromium-flags.conf ~/.config/code-flags.conf
+echo "--ozone-platform=wayland" | tee ~/.config/chromium-flags.conf ~/.config/code-flags.conf
