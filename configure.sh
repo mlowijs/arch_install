@@ -115,7 +115,7 @@ chmod +x ~/.config/plasma-workspace/env/envvars.sh
 #
 # Software
 #
-paru -S --noconfirm chromium bitwarden slack-desktop thunderbird spotify
+paru -S --noconfirm firefox bitwarden slack-desktop thunderbird spotify
 paru -S --noconfirm rider dotnet-host dotnet-runtime dotnet-sdk visual-studio-code-bin nodejs npm postman-bin
 
 #
