@@ -78,7 +78,7 @@ echo "Enter new password for user 'root'"
 arch-chroot /mnt passwd
 
 # User
-arch-chroot /mnt useradd -mUG wheel,audio,video,input,disk -s /bin/zsh michiel
+arch-chroot /mnt useradd -mUG wheel,audio,video,input -s /bin/zsh michiel
 echo "Enter new password for user 'michiel'"
 arch-chroot /mnt passwd michiel
 echo "%wheel ALL=(ALL) ALL" > /mnt/etc/sudoers.d/wheel
