@@ -17,13 +17,13 @@ ROOT_UUID=`blkid -t UUID -o value ${ROOT_PARTITION}`
 mkfs.vfat -F32 -n EFI ${BOOT_PARTITION}
 
 cryptsetup luksFormat ${SWAP_PARTITION}
-cryptsetup open ${SWAP_PARTITION} swap
+cryptsetup --perf-no_read_workqueue --perf-no_write_workqueue --persistent open ${SWAP_PARTITION} swap
 
 mkswap -L swap /dev/mapper/swap
 swapon -d /dev/mapper/swap
 
 cryptsetup luksFormat ${ROOT_PARTITION}
-cryptsetup open ${ROOT_PARTITION} root
+cryptsetup --perf-no_read_workqueue --perf-no_write_workqueue --persistent open ${ROOT_PARTITION} root
 
 mkfs.btrfs -f -L root /dev/mapper/root
 
