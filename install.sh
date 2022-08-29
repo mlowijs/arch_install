@@ -69,7 +69,7 @@ echo "LANG=en_US.UTF-8" > /mnt/etc/locale.conf
 echo ${HOSTNAME} > /mnt/etc/hostname
 
 # Mkinitcpio
-sed -i -E 's/MODULES=\(\)/MODULES=(btrfs ${EXTRA_MODULES})/' /mnt/etc/mkinitcpio.conf
+sed -i -E "s/MODULES=\(\)/MODULES=(btrfs ${EXTRA_MODULES})/" /mnt/etc/mkinitcpio.conf
 sed -i -E 's/HOOKS=\(.+?\)/HOOKS=(base systemd autodetect keyboard sd-vconsole modconf block sd-encrypt filesystems)/' /mnt/etc/mkinitcpio.conf
 arch-chroot /mnt mkinitcpio -P
 
