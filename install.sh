@@ -13,30 +13,41 @@ sgdisk -n 1:0:+256M -t 1:EF00 -c 1:EFI -n 2:0:+${SWAP_SIZE} -t 2:8200 -c 2:swap 
 # Formatting
 mkfs.vfat -F32 -n EFI ${BOOT_PARTITION}
 
-mkswap -L swap ${SWAP_PARTITION}
-swapon -d ${SWAP_PARTITION}
+cryptsetup luksFormat ${SWAP_PARTITION}
+cryptsetup open ${SWAP_PARTITION} swap
 
-mkfs.btrfs -f -L root ${ROOT_PARTITION}
+mkswap -L swap /dev/mapper/swap
+swapon -d /dev/mapper/swap
+
+SWAP_UUID=`blkid -t UUID -o value ${SWAP_PARTITION}` 
+
+cryptsetup luksFormat ${ROOT_PARTITION}
+cryptsetup open ${ROOT_PARTITION} root
+
+ROOT_UUID=`blkid -t UUID -o value ${ROOT_PARTITION}` 
+
+mkfs.btrfs -f -L root /dev/mapper/root
 
 # Creating subvolumes and mounting
-mount ${ROOT_PARTITION} /mnt
+mount /dev/mapper/root /mnt
 cd /mnt
 
 btrfs su cr @
 btrfs su cr @home
-btrfs su cr @pkgcache
 
 cd /
 umount /mnt
 
-mount -o ${BTRFS_MOUNT_OPTS},subvol=@ ${ROOT_PARTITION} /mnt
+mount -o ${BTRFS_MOUNT_OPTS},subvol=@ /dev/mapper/root /mnt
 
 cd /mnt
 mkdir boot home
-mkdir -p var/cache/pacman/pkg
+mkdir -p var/cache/pacman
 
-mount -o ${BTRFS_MOUNT_OPTS},subvol=@home ${ROOT_PARTITION} /mnt/home
-mount -o ${BTRFS_MOUNT_OPTS},subvol=@pkgcache ${ROOT_PARTITION} /mnt/var/cache/pacman/pkg
+cd var/cache/pacman
+btrfs su cr pkg
+
+mount -o ${BTRFS_MOUNT_OPTS},subvol=@home /dev/mapper/root /mnt/home
 mount -o discard ${BOOT_PARTITION} /mnt/boot
 
 # Install system
@@ -62,7 +73,7 @@ echo ${HOSTNAME} > /mnt/etc/hostname
 
 # Mkinitcpio
 sed -i -E 's/MODULES=\(\)/MODULES=(btrfs ${EXTRA_MODULES})/' /mnt/etc/mkinitcpio.conf
-sed -i -E 's/HOOKS=\(.+?\)/HOOKS=(base systemd autodetect modconf block filesystems keyboard)/' /mnt/etc/mkinitcpio.conf
+sed -i -E 's/HOOKS=\(.+?\)/HOOKS=(base systemd autodetect keyboard sd-vconsole modconf block sd-encrypt filesystems)/' /mnt/etc/mkinitcpio.conf
 arch-chroot /mnt mkinitcpio -P
 
 # Root password
@@ -89,7 +100,7 @@ title Arch Linux
 linux /vmlinuz-linux-zen
 initrd /${MICROCODE_PKG}.img
 initrd /initramfs-linux-zen.img
-options root=LABEL=root rootflags=subvol=@ resume=LABEL=swap rw nowatchdog ${KERNEL_OPTIONS}
+options rd.luks.name=${ROOT_UUID}=root rd.luks.name=${SWAP_UUID}=swap rd.luks.options=discard root=/dev/mapper/root rootflags=subvol=@ resume=/dev/mapper/swap rw nowatchdog ${KERNEL_OPTIONS}
 EOF
 
 arch-chroot /mnt systemctl enable systemd-boot-update.service
