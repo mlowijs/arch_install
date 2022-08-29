@@ -50,7 +50,7 @@ mount -o discard ${BOOT_PARTITION} /mnt/boot
 # Install system
 sed -i -E 's/#ParallelDownloads/ParallelDownloads/' /etc/pacman.conf
 pacstrap /mnt base linux-zen linux-zen-headers linux-firmware btrfs-progs sudo base-devel nano git sof-firmware man-db man-pages zsh openssh cryptsetup ${MICROCODE_PKG} ${EXTRA_PACKAGES}
-genfstab -L /mnt >> /mnt/etc/fstab
+genfstab -U /mnt >> /mnt/etc/fstab
 
 #
 # Setup system
