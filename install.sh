@@ -68,6 +68,9 @@ echo "LANG=en_US.UTF-8" > /mnt/etc/locale.conf
 # Hostname
 echo ${HOSTNAME} > /mnt/etc/hostname
 
+# Swappiness
+echo 'vm.swappiness=10' > /mnt/etc/sysctl.d/99-swappiness.conf
+
 # Mkinitcpio
 sed -i -E "s/MODULES=\(\)/MODULES=(btrfs ${EXTRA_MODULES})/" /mnt/etc/mkinitcpio.conf
 sed -i -E 's/HOOKS=\(.+?\)/HOOKS=(base systemd autodetect keyboard sd-vconsole modconf block sd-encrypt filesystems)/' /mnt/etc/mkinitcpio.conf
