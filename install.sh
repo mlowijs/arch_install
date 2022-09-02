@@ -10,8 +10,8 @@ sgdisk -Z ${DEVICE}
 sgdisk -o ${DEVICE}
 sgdisk -n 1:0:+256M -t 1:EF00 -c 1:EFI -n 2:0:+${SWAP_SIZE} -t 2:8200 -c 2:swap -n 3:0:0 -t 3:8300 -c 3:root ${DEVICE}
 
-SWAP_UUID=`blkid -t UUID -o value ${SWAP_PARTITION}`
-ROOT_UUID=`blkid -t UUID -o value ${ROOT_PARTITION}` 
+SWAP_UUID=`blkid -s UUID -o value ${SWAP_PARTITION}`
+ROOT_UUID=`blkid -s UUID -o value ${ROOT_PARTITION}` 
 
 # Formatting
 mkfs.vfat -F32 -n EFI ${BOOT_PARTITION}
