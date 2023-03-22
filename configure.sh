@@ -24,6 +24,9 @@ echo "options iwlmvm power_scheme=3" | sudo tee /etc/modprobe.d/iwlmvm.conf
 sudo systemctl enable --now NetworkManager
 sudo nmcli d wifi connect "BS55" password $1
 
+sudo pacman -S --noconfirm wireless-regdb
+echo 'WIRELESS_REGDOM="NL"' | sudo tee /etc/conf.d/wireless-regdom
+
 sudo timedatectl set-ntp true
 
 # Setup pacman and builds
